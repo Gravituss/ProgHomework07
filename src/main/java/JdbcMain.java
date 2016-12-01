@@ -33,6 +33,7 @@ public class JdbcMain {
                 rs = stmt.executeQuery("SELECT * FROM spaceships");
 
 //            System.out.println(stmt.executeUpdate("delete from cars where model='ZAZ'"));
+
                 while (rs.next()) {
                     //Retrieve by index
                     String model = rs.getString("model");
@@ -53,9 +54,22 @@ public class JdbcMain {
 
 
 
+//-----------------------------------UPDATING ONE RECORD------------------------------------------
+                System.out.println("-----------Updating one record...");
+                stmt.executeUpdate("update spaceships set speed=49, passengers=19 where model='starone'");
+
+                rs = stmt.executeQuery("SELECT * FROM spaceships");
 
 
-                System.out.println("Cleaning up the database...");
+                while (rs.next()) {
+                    //Retrieve by index
+                    String model = rs.getString("model");
+                    int speed = rs.getInt("speed");
+                    int passengers = rs.getInt("passengers");
+                    System.out.println(model + " | " + speed + " | " + passengers + "|");
+                }
+//-----------------------------------CLEANING UP THE TABLE------------------------------------------
+                System.out.println("-----------Cleaning up the table...");
                 System.out.println(stmt.executeUpdate("delete from spaceships where speed > 0"));
                 rs = stmt.executeQuery("SELECT * FROM spaceships");
 //            STEP 6: Clean-up environment
